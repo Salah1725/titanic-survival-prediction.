@@ -23,7 +23,7 @@ from sklearn.model_selection import cross_val_score
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
 
-def load_data(filepath="data/titanic.csv"):
+def load_data(filepath="data/train.csv"):
     """Load the Titanic dataset and return a DataFrame."""
     df = pd.read_csv(filepath)
     return df

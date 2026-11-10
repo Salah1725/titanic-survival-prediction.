@@ -12,9 +12,10 @@ Predicts whether a passenger survived the Titanic disaster using machine learnin
 ## Project Structure
 
 ```
-Titanic Survival Prediction/
+Titanic_ML/
 ├── data/
-│   └── titanic.csv              # Raw dataset
+│   ├── train.csv                # Raw Kaggle dataset
+│   └── titanic_cleaned.csv      # Output of 2_data_cleaning.ipynb
 ├── 1_eda.ipynb                 # Exploratory Data Analysis
 ├── 2_data_cleaning.ipynb       # Data Cleaning & Feature Engineering
 ├── 3_model_building.ipynb      # Model Training & Evaluation
@@ -33,20 +34,22 @@ Titanic Survival Prediction/
 
 ## Results
 
-7 classification models were trained and compared. Best model was further tuned with GridSearchCV.
+7 classification models were trained and compared on a held-out test set (179 passengers). Random Forest was then tuned with GridSearchCV.
 
 | Model | Accuracy | Precision | Recall | F1 Score |
 |-------|----------|-----------|--------|----------|
-| Logistic Regression | 0.8380 | 0.7941 | 0.7826 | 0.7883 |
+| **Logistic Regression** | **0.8380** | **0.7941** | **0.7826** | **0.7883** |
 | SVM | 0.8268 | 0.7969 | 0.7391 | 0.7669 |
 | Random Forest | 0.8156 | 0.7812 | 0.7246 | 0.7519 |
 | Gradient Boosting | 0.8156 | 0.8103 | 0.6812 | 0.7402 |
 | Decision Tree | 0.7989 | 0.7797 | 0.6667 | 0.7188 |
 | Naive Bayes | 0.7765 | 0.6883 | 0.7681 | 0.7260 |
 | KNN | 0.7709 | 0.7500 | 0.6087 | 0.6720 |
-| **Random Forest (Tuned)** | **0.8045** | **0.7656** | **0.7101** | **0.7368** |
+| Random Forest (Tuned) | 0.8045 | 0.7656 | 0.7101 | 0.7368 |
 
 Best GridSearchCV parameters: `max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=200`
+
+Tuning did not help on the test set (0.8156 → 0.8045): with only 179 test passengers, one prediction is worth ~0.56 points of accuracy, so differences between the top models are within noise. The simpler Logistic Regression is kept as the final model.
 
 5-Fold Cross-Validation (mean accuracy): Logistic Regression (0.8175), Gradient Boosting (0.8133), SVM (0.8104), Random Forest (0.8077)
 
